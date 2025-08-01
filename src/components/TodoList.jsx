@@ -25,14 +25,14 @@ function Input({ text, onTextChange, onClick}) {
     );
 }
 
-function List({ listOfItems }) {
+function List({ listOfItems, onDeleteItem }) {
     if (!listOfItems) return <p>Sem Itens!</p>;
 
     const items = listOfItems.map((item, index) => {
         return (
             <tr key={index}>
                 <td>{item}</td>
-                <td>X</td>
+                <td><button onClick={() => onDeleteItem(index)}>X</button></td>
             </tr>
         );
     });
@@ -68,6 +68,16 @@ export default function TodoList({ title }) {
         
         setListOfItems([...listOfItems, text]);
     }
+
+    function handleItemDeletion(itemIndex) {
+        const newList = [];
+        listOfItems.forEach((item, index) => {
+            if (index !== itemIndex)
+                newList.push(item);
+        });
+
+        setListOfItems(newList);
+    }
     
     return (
         <div className="todo-container">
@@ -79,6 +89,7 @@ export default function TodoList({ title }) {
             />
             <List 
                 listOfItems={listOfItems}
+                onDeleteItem={handleItemDeletion}
             />
         </div>
     );
