@@ -1,0 +1,80 @@
+.todo {
+    display: inline-block;
+    width: 400px;
+    min-height: 270px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, .4);
+}
+
+.todo .todo-header {
+    color: #fff;
+    padding: 20px 5px;
+    margin-bottom: 20px;
+    border-radius: 5px 5px 0px 0px;
+    background-color: rgb(45, 192, 45);
+}
+
+.todo .todo-header h1 {
+    margin: unset;
+    padding: unset;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.todo .todo-input {
+    width: fit-content;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+.todo .todo-input input {
+    width: 250px;
+    height: 30px;
+    font-size: 11pt;
+    margin-right: 5px;
+}
+
+.todo .todo-input button {
+    height: 36px;
+    color: #fff;
+    padding: 5px 10px;
+    border: unset;
+    border-radius: 5px;
+    background-color: rgb(22, 22, 221);
+}
+
+.todo .todo-input button:hover {
+    background-color: rgb(41, 41, 248);
+}
+
+.todo .todo-input button:active {
+    background-color: rgb(22, 22, 221);
+}
+    
+.todo .todo-list {
+    margin: auto;
+    padding: 0px 5px 0px 15px;
+}
+
+.todo .todo-list td:first-child {
+    width: 100%;
+}
+
+.todo .todo-list button {
+    font-size: 14pt;
+    padding: 5px 15px;
+    border: unset;
+    background-color: unset;
+}
+
+.todo .todo-list button:hover {
+    background-color: #ccc;
+}
+
+.todo .todo-list p {
+    margin: 50px;
+    text-align: center;
+    font-style: italic;
+    color: rgb(85, 87, 85);
+}

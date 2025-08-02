@@ -9,7 +9,7 @@ function Header({ title }) {
     );
 }
 
-function Input({ text, onTextChange, onClick}) {
+function ControlPanel({ text, onTextChange, onClick}) {
     return (
         <div className="todo-input">
             <form>
@@ -26,8 +26,6 @@ function Input({ text, onTextChange, onClick}) {
 }
 
 function List({ listOfItems, onDeleteItem }) {
-    if (!listOfItems) return <p>Sem Itens!</p>;
-
     const items = listOfItems.map((item, index) => {
         return (
             <tr key={index}>
@@ -36,6 +34,14 @@ function List({ listOfItems, onDeleteItem }) {
             </tr>
         );
     });
+
+    if (!items.length) {
+        return (
+            <div className="todo-list">
+                <p>Sem itens!</p>
+            </div>
+        );
+    }
 
     return (
         <div className="todo-list">
@@ -48,7 +54,7 @@ function List({ listOfItems, onDeleteItem }) {
     );
 }
 
-export default function TodoList({ title }) {    
+export default function TodoList({ title, width, height }) {    
     const [inputText, setInputText] = useState('');
     const [listOfItems, setListOfItems] = useState([]);
 
@@ -78,11 +84,16 @@ export default function TodoList({ title }) {
 
         setListOfItems(newList);
     }
+
+    const style = {
+        width: width,
+        height: height,
+    }
     
     return (
-        <div className="todo-container">
+        <div className="todo" style={style}>
             <Header title={title} />
-            <Input
+            <ControlPanel
                 text={inputText}
                 onTextChange={handleInputText}
                 onClick={handleButtonClick}
