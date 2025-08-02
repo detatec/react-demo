@@ -25,7 +25,7 @@ function ControlPanel({ text, onTextChange, onClick}) {
     );
 }
 
-function List({ listOfItems, onDeleteItem }) {
+function List({ maxHeight, listOfItems, onDeleteItem }) {
     const items = listOfItems.map((item, index) => {
         return (
             <tr key={index}>
@@ -37,14 +37,14 @@ function List({ listOfItems, onDeleteItem }) {
 
     if (!items.length) {
         return (
-            <div className="todo-list">
+            <div className="todo-list" style={{height: maxHeight}}>
                 <p>Sem itens!</p>
             </div>
         );
     }
 
     return (
-        <div className="todo-list">
+        <div className="todo-list" style={{height: maxHeight}}>
             <table className="items">
                 <tbody>
                     {items}
@@ -85,13 +85,17 @@ export default function TodoList({ title, width, height }) {
         setListOfItems(newList);
     }
 
-    const style = {
+    if (!height || height < 300)
+        height = 300;
+
+    const listHeight = height ? height - 172 : height;
+    const mainStyle = {
         width: width,
         height: height,
     }
-    
+
     return (
-        <div className="todo" style={style}>
+        <div className="todo" style={mainStyle}>
             <Header title={title} />
             <ControlPanel
                 text={inputText}
@@ -99,6 +103,7 @@ export default function TodoList({ title, width, height }) {
                 onClick={handleButtonClick}
             />
             <List 
+                maxHeight={listHeight}
                 listOfItems={listOfItems}
                 onDeleteItem={handleItemDeletion}
             />
