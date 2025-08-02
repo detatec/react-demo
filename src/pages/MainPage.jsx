@@ -1,4 +1,3 @@
-import TodoList from '../components/TodoList'
 import Demo from '../components/Demo'
 import { demos } from './demo-data'
 

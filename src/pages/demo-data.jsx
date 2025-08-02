@@ -2,7 +2,7 @@ import TodoList from "../components/TodoList";
 
 const todoDemo = {
     title: "Todo List Demo",
-    description: "Um componente que permite ao guardar informações de coisas a fazer",
+    description: "Um pequeno component que permite gerir uma lista de coisas por fazer",
     style: null,
 
     content: (
