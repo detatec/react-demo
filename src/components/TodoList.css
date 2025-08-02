@@ -22,20 +22,20 @@
     text-transform: capitalize;
 }
 
-.todo .todo-input {
+.todo .todo-cpanel {
     width: fit-content;
     margin: auto;
     margin-bottom: 30px;
 }
 
-.todo .todo-input input {
+.todo .todo-cpanel input {
     width: 250px;
     height: 30px;
     font-size: 11pt;
     margin-right: 5px;
 }
 
-.todo .todo-input button {
+.todo .todo-cpanel button {
     height: 36px;
     color: #fff;
     padding: 5px 10px;
@@ -44,11 +44,11 @@
     background-color: rgb(22, 22, 221);
 }
 
-.todo .todo-input button:hover {
+.todo .todo-cpanel button:hover {
     background-color: rgb(41, 41, 248);
 }
 
-.todo .todo-input button:active {
+.todo .todo-cpanel button:active {
     background-color: rgb(22, 22, 221);
 }
     

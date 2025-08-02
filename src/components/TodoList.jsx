@@ -9,15 +9,13 @@ function Header({ title }) {
     );
 }
 
-function ControlPanel({ text, onTextChange, onClick}) {
+function ControlPanel({ onClick}) {
     return (
-        <div className="todo-input">
+        <div className="todo-cpanel">
             <form>
                 <input 
                     type="text" 
-                    value={text}
                     placeholder="Introduzir novo item aqui!"
-                    onChange={onTextChange}
                 />
                 <button onClick={onClick}>Adicionar</button>
             </form>
@@ -55,23 +53,19 @@ function List({ maxHeight, listOfItems, onDeleteItem }) {
 }
 
 export default function TodoList({ title, width, height }) {    
-    const [inputText, setInputText] = useState('');
     const [listOfItems, setListOfItems] = useState([]);
-
-    function handleInputText(e) {
-        setInputText(e.target.value);
-    }
 
     function handleButtonClick(e) {
         e.preventDefault();
-        const text = inputText.trim();
+        const inputField = document.querySelector(".todo-input input");
+        const text = inputField.value.trim();
         if (!text) return;
-
-        setInputText('');
+                
         for (let t of listOfItems) {
             if (t == text) return;
         }
         
+        inputField.value = "";
         setListOfItems([...listOfItems, text]);
     }
 
@@ -98,8 +92,6 @@ export default function TodoList({ title, width, height }) {
         <div className="todo" style={mainStyle}>
             <Header title={title} />
             <ControlPanel
-                text={inputText}
-                onTextChange={handleInputText}
                 onClick={handleButtonClick}
             />
             <List 
