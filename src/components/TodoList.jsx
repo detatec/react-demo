@@ -70,13 +70,9 @@ export default function TodoList({ title, width, height }) {
 
     function handleItemDeletion(itemIndex) {
         return function() {
-            const newList = [];
-            listOfItems.forEach((item, index) => {
-                if (index !== itemIndex)
-                    newList.push(item);
-            });
-
-            setListOfItems(newList);
+            setListOfItems(listOfItems.filter(
+                (_, index) => index != itemIndex
+            ));
         }
     }
 
