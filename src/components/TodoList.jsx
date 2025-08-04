@@ -9,12 +9,12 @@ function Header({ title }) {
     );
 }
 
-function ControlPanel({ onClick}) {
+function ControlPanel({ onClick }) {
     return (
         <div className="todo-cpanel">
             <form>
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     placeholder="Introduzir novo item aqui!"
                 />
                 <button onClick={onClick}>Adicionar</button>
@@ -35,14 +35,14 @@ function List({ maxHeight, listOfItems, onDeleteItem }) {
 
     if (!items.length) {
         return (
-            <div className="todo-list" style={{height: maxHeight}}>
+            <div className="todo-list" style={{ height: maxHeight }}>
                 <p>Sem itens!</p>
             </div>
         );
     }
 
     return (
-        <div className="todo-list" style={{height: maxHeight}}>
+        <div className="todo-list" style={{ height: maxHeight }}>
             <table className="items">
                 <tbody>
                     {items}
@@ -52,19 +52,20 @@ function List({ maxHeight, listOfItems, onDeleteItem }) {
     );
 }
 
-export default function TodoList({ title, width, height }) {    
+export default function TodoList({ title, width, height }) {
     const [listOfItems, setListOfItems] = useState([]);
 
     function handleButtonClick(e) {
         e.preventDefault();
-        const inputField = document.querySelector(".todo-input input");
+
+        const inputField = document.querySelector(".todo-cpanel input");
         const text = inputField.value.trim();
         if (!text) return;
-                
+
         for (let t of listOfItems) {
             if (t == text) return;
         }
-        
+
         inputField.value = "";
         setListOfItems([...listOfItems, text]);
     }
@@ -94,7 +95,7 @@ export default function TodoList({ title, width, height }) {
             <ControlPanel
                 onClick={handleButtonClick}
             />
-            <List 
+            <List
                 maxHeight={listHeight}
                 listOfItems={listOfItems}
                 onDeleteItem={handleItemDeletion}

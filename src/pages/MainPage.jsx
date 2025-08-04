@@ -2,7 +2,6 @@ import Demo from '../components/Demo'
 import { demos } from './demo-data'
 
 export default function Page() {
-    const title = "Todo List";
 
     const theDemos = demos.map(demo => {
         return (
