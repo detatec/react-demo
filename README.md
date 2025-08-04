@@ -4,10 +4,10 @@ Apenas uma demo para exercitar conceitos de react e desenvolver pequenos aplicat
 
 Sinta-se livre para contribuir!
 
-## Requisitos Para Executar O Aplicatovo
+## Requisitos do Projecto
 
-* node
-* npm
+* node v24.4.1
+* npm 11.4.2
 
 ## Instalação
 
