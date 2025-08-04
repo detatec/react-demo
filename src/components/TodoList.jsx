@@ -23,33 +23,31 @@ function ControlPanel({ onClick }) {
     );
 }
 
-function List({ maxHeight, listOfItems, onDeleteItem }) {
+function List({ maxHeight, listOfItems, onDeleteItemAt }) {
     const items = listOfItems.map((item, index) => {
         return (
             <tr key={index}>
-                <td>{item}</td>
-                <td><button onClick={() => onDeleteItem(index)}>X</button></td>
+                <td >{item}</td>
+                <td>
+                    <button onClick={onDeleteItemAt(index)}>X</button>
+                </td>
             </tr>
         );
     });
 
-    if (!items.length) {
-        return (
+    return (!items.length) ? (
             <div className="todo-list" style={{ height: maxHeight }}>
                 <p>Sem itens!</p>
             </div>
-        );
-    }
-
-    return (
-        <div className="todo-list" style={{ height: maxHeight }}>
-            <table className="items">
-                <tbody>
-                    {items}
-                </tbody>
-            </table>
-        </div>
-    );
+        ) : (
+            <div className="todo-list" style={{ height: maxHeight }}>
+                <table className="items">
+                    <tbody>
+                        {items}
+                    </tbody>
+                </table>
+            </div>
+        )
 }
 
 export default function TodoList({ title, width, height }) {
@@ -71,19 +69,22 @@ export default function TodoList({ title, width, height }) {
     }
 
     function handleItemDeletion(itemIndex) {
-        const newList = [];
-        listOfItems.forEach((item, index) => {
-            if (index !== itemIndex)
-                newList.push(item);
-        });
+        return function() {
+            const newList = [];
+            listOfItems.forEach((item, index) => {
+                if (index !== itemIndex)
+                    newList.push(item);
+            });
 
-        setListOfItems(newList);
+            setListOfItems(newList);
+        }
     }
 
     if (!height || height < 300)
         height = 300;
 
-    const listHeight = height ? height - 172 : height;
+    const listHeight = height - 172;
+
     const mainStyle = {
         width: width,
         height: height,
@@ -98,7 +99,7 @@ export default function TodoList({ title, width, height }) {
             <List
                 maxHeight={listHeight}
                 listOfItems={listOfItems}
-                onDeleteItem={handleItemDeletion}
+                onDeleteItemAt={handleItemDeletion}
             />
         </div>
     );
