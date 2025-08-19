@@ -1,4 +1,4 @@
-import TodoList from '../../components/TodoList.jsx';
+import TodoList from '../components/TodoList.jsx';
 
 export const listOfDemos = [
     <TodoDemo key={0}/>,
