@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import DemoPage from './pages/DemoPage'
+import DemoPage from './pages/demo/DemoPage.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
