@@ -31,7 +31,7 @@ export function TodoDemo() {
             style={null}
         >
             <TodoList 
-                title={'Todo List'}
+                title={'Todo List Demo'}
                 width={500}
                 height={400}
             />

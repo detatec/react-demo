@@ -9,29 +9,32 @@ function Header({ title }) {
     );
 }
 
-function ControlPanel({ onClick }) {
+function ControlPanel({ inputText, onInputChange, onAddItem }) {
     return (
         <div className="todo-cpanel">
             <form>
                 <input
                     type="text"
+                    value={inputText}
                     placeholder="Introduzir novo item aqui!"
+                    onChange={onInputChange}
                 />
-                <button onClick={onClick}>Adicionar</button>
+                <button onClick={onAddItem}>Adicionar</button>
             </form>
         </div>
     );
 }
 
-function List({ maxHeight, listOfItems, onDeleteItemAt }) {
+function List({ maxHeight, listOfItems, onMarkDone, onDeleteItem }) {
     const items = listOfItems.map((item, index) => {
         return (
-            <tr key={index}>
-                <td >{item}</td>
-                <td>
-                    <button onClick={onDeleteItemAt(index)}>X</button>
-                </td>
-            </tr>
+            <Item
+                key={index}
+                index={index}
+                item={item}
+                onDone={onMarkDone}
+                onDelete={onDeleteItem}
+            />
         );
     });
 
@@ -50,31 +53,67 @@ function List({ maxHeight, listOfItems, onDeleteItemAt }) {
         )
 }
 
+function Item({index, item, onDone, onDelete}) {
+    return (
+        <tr className={item.done ? 'item-done' : ''}>
+            <td>{item.text}</td>
+            <td>
+                <ItemButton
+                    title={'Mark as Done'}
+                    text={item.done ? '--' : 'V'}
+                    onClickEvent={() => onDone(index)}
+                />
+            </td>
+            <td>
+                <ItemButton
+                    title={'Delete Item'}
+                    text={'X'}
+                    onClickEvent={() => onDelete(index)}
+                />
+            </td>
+        </tr>
+    );
+}
+
+function ItemButton({text, onClickEvent}) {
+    return (
+        <button onClick={onClickEvent}>
+            {text}
+        </button>
+    );
+}
+
 export default function TodoList({ title, width, height }) {
     const [listOfItems, setListOfItems] = useState([]);
+    const [inputText, setInputText] = useState('');
 
-    function handleButtonClick(e) {
+    function handleInput(e) {
+        setInputText(e.target.value);
+    }
+
+    function handleAddItem(e) {
         e.preventDefault();
+        if (!inputText) return;
 
-        const inputField = document.querySelector(".todo-cpanel input");
-        const text = inputField.value.trim();
-        if (!text) return;
+        const text = inputText.trim();
+        for (let t of listOfItems)
+            if (text == t) return;
 
-        for (let t of listOfItems) {
-            if (t == text) return;
-        }
-
-        inputField.value = "";
-        setListOfItems([...listOfItems, text]);
+        setListOfItems([createItem(text), ...listOfItems]);
+        setInputText('');
     }
 
     function handleItemDeletion(itemIndex) {
-        return function() {
-            setListOfItems(listOfItems.filter(
-                (_, index) => index != itemIndex
-            ));
-        }
+        setListOfItems(listOfItems.filter(
+            (_, index) => index != itemIndex
+        ));
     }
+
+    function handleDoneClick(itemIndex) {
+        const newList = [...listOfItems];
+        newList[itemIndex].done = !newList[itemIndex].done;
+        setListOfItems(newList);
+    } 
 
     if (!height || height < 300)
         height = 300;
@@ -90,13 +129,21 @@ export default function TodoList({ title, width, height }) {
         <div className="todo" style={mainStyle}>
             <Header title={title} />
             <ControlPanel
-                onClick={handleButtonClick}
+                inputText={inputText}
+                onInputChange={handleInput}
+                onAddItem={handleAddItem}
             />
             <List
                 maxHeight={listHeight}
                 listOfItems={listOfItems}
-                onDeleteItemAt={handleItemDeletion}
+                onMarkDone={handleDoneClick}
+                onDeleteItem={handleItemDeletion}
             />
         </div>
     );
+}
+
+// Todo Items domain
+function createItem(text) {
+    return {text: text, done: false}
 }
