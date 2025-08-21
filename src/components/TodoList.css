@@ -23,22 +23,36 @@
 }
 
 .todo .todo-cpanel {
-    width: fit-content;
+    /* width: ; */
+    padding: 0px 5px;
     margin: auto;
     margin-bottom: 30px;
+}
+
+.todo .todo-cpanel .input-control {
+    display: block;
+    width: fit-content;
+    margin: 0px auto 10px auto;
 }
 
 .todo .todo-cpanel input {
     width: 250px;
     height: 30px;
     font-size: 11pt;
-    margin-right: 5px;
+    border-radius: 5px;
+    border-style: solid;
+}
+
+.todo .todo-cpanel .button-list {
+    width: fit-content;
+    margin: auto;
 }
 
 .todo .todo-cpanel button {
     height: 36px;
     color: #fff;
     padding: 5px 10px;
+    margin: 0px 4px;
     border: unset;
     border-radius: 5px;
     background-color: rgb(22, 22, 221);
@@ -59,8 +73,19 @@
     padding: 0px 5px 0px 15px;
 }
 
-.todo .todo-list td:first-child {
+.todo .todo-list .item td:first-child {
     width: 100%;
+}
+
+.todo .todo-list .item.selected:hover,
+.todo .todo-list .item:hover {
+    /* color: inherit; */
+    background-color: rgba(32, 165, 218, 0.63);
+}
+
+.todo .todo-list .item.selected {
+    /* color: white; */
+    background-color: #00000044;
 }
 
 .todo .todo-list button {
