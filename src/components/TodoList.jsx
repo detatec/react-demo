@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import './TodoList.css'
+import './TodoList.css';
 
-const MIN_HEIGHT = 400;
+const MIN_WIDTH  = 500; // px
+const MIN_HEIGHT = 400; // px
 
 function Header({ title }) {
     return (
@@ -207,7 +208,7 @@ export default function TodoList({ title, width, height }) {
                 newSelection.clear();
                 newSelection.add(index);
             }
-        }else {
+        } else {
             if (!e.ctrlKey && newSelection.size >= 1)
                 newSelection.clear();
             newSelection.add(index);
@@ -215,11 +216,12 @@ export default function TodoList({ title, width, height }) {
         setSelectedItems(newSelection);
     }
 
+    if (!width || width < MIN_WIDTH)
+        width = MIN_WIDTH;
     if (!height || height < MIN_HEIGHT)
         height = MIN_HEIGHT;
 
     const listHeight = height - 216;
-
     const mainStyle = {
         width: width,
         height: height,
