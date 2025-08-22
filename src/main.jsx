@@ -6,5 +6,10 @@ import TodoList from './components/TodoList.jsx';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <DemoPage />
+    {/* <TodoList
+      title={'Todo List'}
+      width={500}
+      height={400}
+    /> */}
   </StrictMode>,
 );

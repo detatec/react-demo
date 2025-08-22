@@ -1,5 +1,4 @@
 import TodoList from '../components/TodoList.jsx';
-import './DemoSet.css';
 
 export const listOfDemos = [
     <TodoDemo key={0}/>,
@@ -11,14 +10,14 @@ export function Demo({
     children,
 }) {
     return (
-        <div className='demo'>
-            <h2 className='demo-title'>
+        <div className="demo">
+            <h2 className="demo-title">
                 {title}
             </h2>
-            <p className='demo-desc'>
+            <p className="demo-desc">
                 {description}
             </p>
-            <div className='demo-content'>
+            <div className="demo-content">
                 {children}
             </div>
         </div>
@@ -26,11 +25,13 @@ export function Demo({
 }
 
 export function TodoDemo() {
+    const title = 'Todo List Demo';
+    const desc  = 'Um pequeno componente que permite gerir uma lista de coisas por fazer.';
+    
     return (
         <Demo
-            title={'Todo List Demo'}
-            description={'Um pequeno componente que permite gerir uma lista de coisas por fazer.'}
-            childreStyle={{textAlign: 'center'}}
+            title={title}
+            description={desc}
         >
             <TodoList title={'Todo List Demo'} />
         </Demo>
